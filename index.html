@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SmartIndia – Online Marketplace</title>
+<style>
+:root{--bg:#f6f7f4;--card:#fff;--ink:#17231d;--mut:#5f6b64;--brand:#0f6b4f;--brand-ink:#fff;--pop:#f5b82e;--red:#c8372d;--line:#e2e6e0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--card:#18211c;--ink:#eef3ef;--mut:#9aa8a0;--brand:#2fa57e;--brand-ink:#08140e;--line:#26332b}}
+:root[data-theme="dark"]{--bg:#101613;--card:#18211c;--ink:#eef3ef;--mut:#9aa8a0;--brand:#2fa57e;--brand-ink:#08140e;--line:#26332b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.4 "Trebuchet MS",system-ui,sans-serif;max-width:760px;margin:0 auto;padding-bottom:84px}
+header{background:var(--brand);color:var(--brand-ink);padding:12px 14px 10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.logo{font-size:20px;letter-spacing:-.3px}.logo b{color:var(--pop)}
+.loc{font-size:13px;opacity:.9;margin-top:2px}
+.search{display:flex;gap:8px;margin-top:10px}
+.search input{flex:1;border:0;border-radius:10px;padding:11px 12px;font:inherit;background:var(--card);color:var(--ink)}
+.search button{border:0;border-radius:10px;background:var(--pop);color:#17231d;font-weight:700;padding:0 14px}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:12px 14px;scrollbar-width:none}
+.cats button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 14px;font:inherit}
+.cats button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.hero{margin:0 14px;border-radius:16px;padding:20px;background:var(--pop);color:#17231d;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.hero h1{font-size:26px;line-height:1.1}.hero p{margin-top:6px;font-size:14px}
+.hero .big{font-size:44px;font-weight:800;line-height:1}
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:14px}
+.svc div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 4px;text-align:center;font-size:12px}
+.svc span{display:block;font-size:22px}
+h2{font-size:18px;padding:6px 14px 8px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 14px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
+.p{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.img{height:120px;display:flex;align-items:center;justify-content:center;font-size:44px;position:relative}
+.rate{position:absolute;left:8px;bottom:8px;background:var(--card);color:var(--ink);border-radius:6px;font-size:12px;padding:1px 6px}
+.off{position:absolute;right:8px;top:8px;background:var(--red);color:#fff;border-radius:6px;font-size:11px;padding:2px 6px;font-weight:700}
+.info{padding:10px;display:flex;flex-direction:column;gap:3px;flex:1}
+.name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.price b{font-size:17px}.price s{color:var(--mut);font-size:13px;margin-left:6px}
+.upi{color:var(--brand);font-size:12px}
+.add{margin-top:auto;border:1.5px solid var(--brand);background:none;color:var(--brand);border-radius:8px;padding:7px;font:inherit;font-weight:700}
+.add.in{background:var(--brand);color:var(--brand-ink)}
+.pay{display:flex;gap:8px;overflow-x:auto;padding:16px 14px;scrollbar-width:none}
+.pay div{flex:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:13px;font-weight:700}
+nav{position:fixed;left:0;right:0;bottom:0;max-width:760px;margin:0 auto;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));font-size:12px}
+nav a{text-align:center;color:var(--mut);text-decoration:none;position:relative}
+nav a.on{color:var(--brand);font-weight:700}nav span{display:block;font-size:20px}
+#n{position:absolute;top:-4px;right:-8px;background:var(--red);color:#fff;border-radius:10px;font-size:11px;padding:0 5px}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--pop);outline-offset:2px}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><div class="logo">Smart<b>India</b></div><div>🔔</div></div>
+  <div class="loc">📍 Sector 31, Gurugram – 122001 ▾</div>
+  <div class="search"><input id="q" placeholder="Mobile, kapde, TV khojein…" aria-label="Search"><button>Khojein</button></div>
+</header>
+
+<div class="cats" id="cats"></div>
+
+<section class="hero">
+  <div><h1>Mega Sale</h1><p>Chune hue products par UPI se extra chhoot</p></div>
+  <div class="big">80%<br><small style="font-size:14px;font-weight:700">tak off</small></div>
+</section>
+
+<section class="svc">
+  <div><span>⚡</span>8 Minute</div><div><span>✈️</span>Travel</div><div><span>📱</span>Phone Becho</div><div><span>🎁</span>Gift Card</div>
+</section>
+
+<h2>Aapke liye deals</h2>
+<section class="grid" id="grid"></section>
+
+<h2 style="margin-top:18px">Payment ke aasan tareeke</h2>
+<section class="pay"><div>💳 Credit Card</div><div>📆 EMI</div><div>⏱ Pay Later</div><div>📲 UPI</div><div>💵 Cash on Delivery</div></section>
+
+<nav>
+  <a class="on" href="#"><span>🏠</span>Home</a><a href="#"><span>▶️</span>Play</a><a href="#"><span>🗂</span>Categories</a><a href="#"><span>👤</span>Account</a><a href="#"><span>🛒</span>Cart<b id="n">0</b></a>
+</nav>
+
+<script>
+var cats=["Aapke liye","Fashion","Mobiles","Electronics","Beauty","Ghar"];
+var items=[
+ {n:"Men's Running Shoes",e:"👟",p:1052,m:4199,r:4.2,c:"Fashion",bg:"#cfe3f5"},
+ {n:"Casual Sneakers",e:"👟",p:948,m:7299,r:4.2,c:"Fashion",bg:"#f5dccf"},
+ {n:"Wireless Earbuds",e:"🎧",p:699,m:2999,r:4.1,c:"Electronics",bg:"#d5ecd6"},
+ {n:"Smart TV 43\"",e:"📺",p:21999,m:39999,r:4.4,c:"Electronics",bg:"#e4d9f3"},
+ {n:"Trolley Bag",e:"🧳",p:1799,m:7999,r:4.3,c:"Fashion",bg:"#f7ebc3"},
+ {n:"Smartphone 5G",e:"📱",p:12999,m:18999,r:4.5,c:"Mobiles",bg:"#d3eef0"},
+ {n:"Lipstick Combo",e:"💄",p:299,m:999,r:4.0,c:"Beauty",bg:"#f6d3dc"},
+ {n:"Protein Oats",e:"🥣",p:249,m:499,r:4.3,c:"Ghar",bg:"#efe3cf"},
+ {n:"Table Lamp",e:"💡",p:549,m:1299,r:4.2,c:"Ghar",bg:"#f4efc4"}
+];
+var cur="Aapke liye",cart={},q="";
+function fmt(x){return "₹"+x.toLocaleString("en-IN")}
+function draw(){
+  document.getElementById("cats").innerHTML=cats.map(function(c){return '<button class="'+(c==cur?'on':'')+'" data-c="'+c+'">'+c+'</button>'}).join("");
+  var list=items.filter(function(i){return (cur=="Aapke liye"||i.c==cur)&&i.n.toLowerCase().indexOf(q)>-1});
+  document.getElementById("grid").innerHTML=list.length?list.map(function(i){
+    var d=Math.round((1-i.p/i.m)*100),k=items.indexOf(i);
+    return '<article class="p"><div class="img" style="background:'+i.bg+'">'+i.e+'<span class="off">'+d+'% off</span><span class="rate">'+i.r+' ★</span></div><div class="info"><div class="name">'+i.n+'</div><div class="price"><b>'+fmt(i.p)+'</b><s>'+fmt(i.m)+'</s></div><div class="upi">UPI se '+fmt(i.p-10)+'</div><button class="add'+(cart[k]?' in':'')+'" data-k="'+k+'">'+(cart[k]?'Cart mein hai ✓':'Cart mein daalein')+'</button></div></article>'
+  }).join(""):'<p style="grid-column:1/-1;color:var(--mut)">Koi product nahi mila. Dusra naam khojein.</p>';
+  document.getElementById("n").textContent=Object.keys(cart).length;
+}
+document.addEventListener("click",function(e){
+  var c=e.target.dataset.c,k=e.target.dataset.k;
+  if(c){cur=c;draw()}
+  if(k){if(cart[k])delete cart[k];else cart[k]=1;draw()}
+});
+document.getElementById("q").addEventListener("input",function(e){q=e.target.value.toLowerCase();draw()});
+draw();
+</script>
+</body>
+</html>
